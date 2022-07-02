@@ -296,56 +296,58 @@ def log():
 def start():
     print('{:^24s}'.format(msg15))
     while True:
-        print(msgline)
-        print(msg16)
-        print(msg17)
-        print(msg18)
-        try:
-            if text_list is not None:
-                print(msg19)
-        except NameError:
-            pass
-        print(exit_msg)
-        selection = input('> ')
-        try:
-            selection = int(selection)
-        except ValueError:
-            pass
-
-        if selection == 1:
-            global random_corpus
-            random_corpus = Corpus(select_corpus(rand=True))
-            number_of_words = random.randint(8, 12)
-            text_list = pseudosentence(random_corpus, number_of_words)
-            print(f'From "{random_corpus.name}", around {number_of_words} words:')
-            print(logger(' '.join(text_list)))
+        while True:
             print(msgline)
-        elif selection == 2:
-            text_file = select_corpus()
-            break
-        elif selection == 3:
+            print(msg16)
+            print(msg17)
+            print(msg18)
             try:
                 if text_list is not None:
-                    log()
+                    print(msg19)
             except NameError:
-                print(msg20)
-        elif selection == 4:
-            return
-        else:
-            print(msg01)
-    print(msg14)
-    while True:
-        try:
-            no_of_sentences = int(input('> '))
-            break
-        except ValueError:
-            print(msg01)
-    global corpus01
-    corpus01 = Corpus(text_file)
-    for _n in range(no_of_sentences):
-        text_list = pseudosentence(corpus01, random.randint(8, 12))
-        print(logger(' '.join(text_list)))
-    print(msgline)
+                pass
+            print(exit_msg)
+            selection = input('> ')
+            try:
+                selection = int(selection)
+            except ValueError:
+                pass
+
+            if selection == 1:
+                global random_corpus
+                random_corpus = Corpus(select_corpus(rand=True))
+                number_of_words = random.randint(8, 12)
+                text_list = pseudosentence(random_corpus, number_of_words)
+                print(f'From "{random_corpus.name}", around {number_of_words} words:')
+                print(logger(' '.join(text_list)))
+                print(msgline)
+            elif selection == 2:
+                text_file = select_corpus()
+                break
+            elif selection == 3:
+                try:
+                    if text_list is not None:
+                        log()
+                except NameError:
+                    print(msg20)
+            elif selection == 4:
+                print('Bye bye!')
+                return
+            else:
+                print(msg01)
+        print(msg14)
+        while True:
+            try:
+                no_of_sentences = int(input('> '))
+                break
+            except ValueError:
+                print(msg01)
+        global corpus01
+        corpus01 = Corpus(text_file)
+        for _n in range(no_of_sentences):
+            text_list = pseudosentence(corpus01, random.randint(8, 12))
+            print(logger(' '.join(text_list)))
+        print(msgline)
 
 
 if __name__ == "__main__":
